@@ -3,7 +3,7 @@
 /**
  * Simple Cache class
  * API Documentation: https://github.com/cosenary/Simple-PHP-Cache
- * 
+ *
  * @author Christian Metz
  * @since 22.12.2011
  * @copyright Christian Metz - MetzWeb Networks
@@ -92,7 +92,7 @@ class Cache {
 
   /**
    * Retrieve cached data by its key
-   * 
+   *
    * @param string $key
    * @param boolean [optional] $timestamp
    * @return string
@@ -100,13 +100,13 @@ class Cache {
   public function retrieve($key, $timestamp = false) {
     $cachedData = $this->_loadCache();
     (false === $timestamp) ? $type = 'data' : $type = 'time';
-    if (!isset($cachedData[$key][$type])) return null; 
+    if (!isset($cachedData[$key][$type])) return null;
     return unserialize($cachedData[$key][$type]);
   }
 
   /**
    * Retrieve all cached data
-   * 
+   *
    * @param boolean [optional] $meta
    * @return array
    */
@@ -127,7 +127,7 @@ class Cache {
 
   /**
    * Erase cached entry by its key
-   * 
+   *
    * @param string $key
    * @return object
    */
@@ -147,7 +147,7 @@ class Cache {
 
   /**
    * Erase all expired entries
-   * 
+   *
    * @return integer
    */
   public function eraseExpired() {
@@ -155,7 +155,8 @@ class Cache {
     if (true === is_array($cacheData)) {
       $counter = 0;
       foreach ($cacheData as $key => $entry) {
-        if (true === $this->_checkExpired($entry['time'], $entry['expire'])) {
+        $new_expire = $new_expire ? $new_expire : $entry['expire'];
+        if (true === $this->_checkExpired($entry['time'], $entry['expire']) || $entry['expire'] > $new_expire) {
           unset($cacheData[$key]);
           $counter++;
         }
@@ -170,7 +171,7 @@ class Cache {
 
   /**
    * Erase all cached entries
-   * 
+   *
    * @return object
    */
   public function eraseAll() {
@@ -184,7 +185,7 @@ class Cache {
 
   /**
    * Load appointed cache
-   * 
+   *
    * @return mixed
    */
   private function _loadCache() {
@@ -198,7 +199,7 @@ class Cache {
 
   /**
    * Get the cache directory path
-   * 
+   *
    * @return string
    */
   public function getCacheDir() {
@@ -211,7 +212,7 @@ class Cache {
 
   /**
    * Get the filename hash
-   * 
+   *
    * @return string
    */
   private function _getHash($filename) {
@@ -219,8 +220,8 @@ class Cache {
   }
 
   /**
-   * Check whether a timestamp is still in the duration 
-   * 
+   * Check whether a timestamp is still in the duration
+   *
    * @param integer $timestamp
    * @param integer $expiration
    * @return boolean
@@ -236,7 +237,7 @@ class Cache {
 
   /**
    * Check if a writable cache directory exists and if not create a new one
-   * 
+   *
    * @return boolean
    */
   private function _checkCacheDir() {
@@ -252,7 +253,7 @@ class Cache {
 
   /**
    * Cache path Setter
-   * 
+   *
    * @param string $path
    * @return object
    */
@@ -263,7 +264,7 @@ class Cache {
 
   /**
    * Cache path Getter
-   * 
+   *
    * @return string
    */
   public function getCachePath() {
@@ -272,7 +273,7 @@ class Cache {
 
   /**
    * Cache name Setter
-   * 
+   *
    * @param string $name
    * @return object
    */
@@ -283,7 +284,7 @@ class Cache {
 
   /**
    * Cache name Getter
-   * 
+   *
    * @return void
    */
   public function getCache() {
@@ -292,7 +293,7 @@ class Cache {
 
   /**
    * Cache file extension Setter
-   * 
+   *
    * @param string $ext
    * @return object
    */
@@ -303,7 +304,7 @@ class Cache {
 
   /**
    * Cache file extension Getter
-   * 
+   *
    * @return string
    */
   public function getExtension() {
