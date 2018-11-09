@@ -172,12 +172,11 @@ class Cache
      *
      * @return int
      */
-    public function eraseExpired()
+    public function eraseExpired($new_expire=false)
     {
         $cacheData = $this->_loadCache();
         if (true === is_array($cacheData)) {
             $counter = 0;
-            $new_expire = '';
             foreach ($cacheData as $key => $entry) {
                 $new_expire = $new_expire ? $new_expire : $entry['expire'];
                 if (true === $this->_checkExpired($entry['time'], $entry['expire']) || $entry['expire'] > $new_expire) {
