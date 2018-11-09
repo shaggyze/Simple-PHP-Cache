@@ -1,8 +1,10 @@
+> Forked from the [original one](https://github.com/cosenary/Simple-PHP-Cache).
+
 # Simple PHP Cache #
 
 ## About ##
 
-A light, simple but powerful PHP5 Cache Class which uses the filesystem for caching.  
+A light, simple but powerful PHP5 Cache Class which uses the filesystem for caching.
 Your feedback is always welcome.
 
 ## Requirements ##
@@ -19,28 +21,28 @@ If you set a new Cache name with `setCache()`, a new cache file will be generate
 
 ### Setup Cache class ###
 
-It's not much trouble to setup the Cache.  
+It's not much trouble to setup the Cache.
 First create a writable directory `cache/` and include the Cache class:
 
 ```php
 <?php
     require_once 'cache.class.php';
-    
+
     // setup 'default' cache
     $c = new Cache();
 ?>
 ```
 
-Now we've setup the Cache instance and can start caching!  
+Now we've setup the Cache instance and can start caching!
 
 ```php
 <?php
     // store a string
     $c->store('hello', 'Hello World!');
-    
+
     // generate a new cache file with the name 'newcache'
     $c->setCache('newcache');
-    
+
     // store an array
     $c->store('movies', array(
       'description' => 'Movies on TV',
@@ -50,30 +52,30 @@ Now we've setup the Cache instance and can start caching!
         'Crank'
       )
     ));
-    
+
     // get cached data by its key
     $result = $c->retrieve('movies');
-    
+
     // display the cached array
     echo '<pre>';
     print_r($result);
     echo '<pre>';
-    
+
     // grab array entry
     $description = $result['description'];
-    
+
     // switch back to the first cache
     $c->setCache('mycache');
-    
+
     // update entry by simply overwriting an existing key
     $c->store('hello', 'Hello everybody out there!');
-    
+
     // erase entry by its key
     $c->erase('hello');
 ?>
 ```
 
-You can also make use of the Method Chaining feature, introduced in PHP5.  
+You can also make use of the Method Chaining feature, introduced in PHP5.
 So you can do something like that:
 
 ```php
@@ -88,9 +90,9 @@ So you can do something like that:
 
 ### Setup the Cache ###
 
-`new Cache(<array>/<string>)`  
+`new Cache(<array>/<string>)`
 
-`string` gives you the basic setup.  
+`string` gives you the basic setup.
 It's the name of your Cache (standard Cache name is *'default'*):
 
     new Cache('YOUR-CACHE-NAME');
@@ -113,7 +115,7 @@ If you don't define a Cache name with the constructor or the `setCache()` method
 - The `data` value can be any type of object (will be serialized).
 - The `expiration` value allows you to define an expiration time.
 
-To change data you can overwrite it by using the same key identifier.  
+To change data you can overwrite it by using the same key identifier.
 Beside the data, the Cache will also store a timestamp.
 
 A sample Cache entry looks like this:
@@ -130,12 +132,12 @@ A sample Cache entry looks like this:
 
 ### Retrieve data ###
 
-`retrieve($key, <$timestamp>)`  
+`retrieve($key, <$timestamp>)`
 
-Get particular cached data by its key.  
+Get particular cached data by its key.
 To retrieve the timestamp of a key, set the second parameter to `true`.
 
-`retrieveAll(<$meta>)`  
+`retrieveAll(<$meta>)`
 
 This allows you retrieve all the cached data at once. You get the meta data by setting the `$meta` argument to `true`.
 
@@ -149,33 +151,33 @@ For erasing cached data are these three methods available:
 
 ```php
 <?php
-    // returns the count of erased entries  
+    // returns the count of erased entries
     echo $c->eraseExpired() . ' expired items erased!';
 ?>
 ```
 
 ### Check cached data ###
 
-`isCached($key)`  
+`isCached($key)`
 
-Check whether any data is associated with the given key.  
+Check whether any data is associated with the given key.
 Returns `true` or `false`.
 
 ### Set Cache name ###
 
-`setCache($name)`  
+`setCache($name)`
 
 If you want to switch to another Cache or create a new one, then use this method to set a new Cache name.
 
 ### Set Cache path ###
 
-`setCachePath($path)`  
+`setCachePath($path)`
 
 The path to the Cache folder must end with a backslash: `my_path_to_the_cache_folder/`
 
 ### Get Cache file path ###
 
-`getCacheDir()`  
+`getCacheDir()`
 
 The method returns the path to your current Cache file (the Cache name is always sh1 encoded):
 
@@ -189,7 +191,7 @@ cache/7505d64a54e061b7acd54ccd58b49dc43500b635.cache
 
 ## History ##
 
-> Upcoming: Simple Cache 2.0  
+> Upcoming: Simple Cache 2.0
 > Implementation of an internal "soft cache", hash-sum handling and the switch to serialization. Thanks @dariushha for his contribution!
 
 **Simple Cache 1.6 - 04/01/2014**
@@ -204,7 +206,7 @@ cache/7505d64a54e061b7acd54ccd58b49dc43500b635.cache
 **Simple Cache 1.4 - 08/09/2013**
 
 - `bug` Fixed loading file twice in `store()` method.
-- `bug` Fixed `retrieve()` method - made it fail safe (thanks @dariushha). 
+- `bug` Fixed `retrieve()` method - made it fail safe (thanks @dariushha).
 
 **Simple Cache 1.3 - 28/02/2013**
 
@@ -247,5 +249,5 @@ cache/7505d64a54e061b7acd54ccd58b49dc43500b635.cache
 
 ## Credits ##
 
-Copyright (c) 2011-2013 - Programmed by Christian Metz / [@cosenary](http://twitter.com/cosenary)  
+Copyright (c) 2011-2013 - Programmed by Christian Metz / [@cosenary](http://twitter.com/cosenary)
 Released under the [BSD License](http://www.opensource.org/licenses/bsd-license.php).
