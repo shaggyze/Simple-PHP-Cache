@@ -172,7 +172,7 @@ class Cache
      *
      * @return int
      */
-    public function eraseExpired($new_expire=false)
+    public function eraseExpired($new_expire = false)
     {
         $cacheData = $this->_loadCache();
         if (true === is_array($cacheData)) {
